@@ -208,11 +208,11 @@
           <tr>
             <td align="left">
               <span style="font-size: 17px"></span>Olivia Han</span>
-              
+
             </td>
             <td align="left">
               <span style="font-size: 17px">Eghosa Ohenhen</span>
-              
+
             </td>
             <td align="left">
               <span style="font-size: 17px">Jaclyn Thi</span>
@@ -302,7 +302,7 @@
         </p>
         <p>
           To address these challenges, recent work has explored multi-agent LLM
-          reasoning frameworks. Hu et al. (2024) introduce a system in which
+          reasoning frameworks. Hu et al. (2024) [3] introduce a system in which
           multiple specialized LLM agents jointly reason over subgraph-centric
           tasks, aggregating their partial results to produce a final decision.
           This distributed approach reduces the computational burden on any
@@ -314,16 +314,15 @@
           combine the strengths of large, expressive LLMs with the efficiency of
           smaller models. Knowledge distillation allows a
           compact student model to learn both the outputs and intermediate
-          reasoning traces of a teacher [3]. Hsieh et al. demonstrate that
+          reasoning traces of a teacher [4]. Hsieh et al. demonstrate that
           chain-of-thought reasoning from very large models can be distilled
           into smaller LLMs with minimal loss in performance, effectively
-          transferring both answers and explanation styles [4].<br />
+          transferring both answers and explanation styles [5].<br />
         </p>
         <p>
           Our work sits at the intersection of these trends. We adopt LLM-based
           graph reasoning for AML, specialize multiple teacher
-          agents as pattern experts in a multi-agent framework (Hu et al.,
-          2024), and distill their judgments into a single, compact student
+          agents as pattern experts in a multi-agent framework and distill their judgments into a single, compact student
           model using supervised distillation techniques inspired by Hinton et
           al. and Hsieh et al.. This design aims to balance
           interpretability, accuracy, and computational efficiency in
@@ -459,7 +458,7 @@
             included in validation or test sets. Pattern distribution was
             stratified across splits to maintain balanced representation.
           </p>
-        
+
 
 		  <h3>Teacher Model Construction</h3>
 
@@ -540,7 +539,6 @@
         </section>
 		<section>
 		  <h2>Discussion</h2>
-		  <h3>Overview</h3>
 		  <h3>Teacher Evaluation Results</h3>
 		  <img src="./images/teacher-eval-95.png" width="512px" />
 
@@ -587,7 +585,7 @@
     <p>
       RAM Constraints: The full LI-Small dataset, while modest by production standards, exceeded available memory when represented as an igraph object with full edge attributes and metadata. This necessitated our fraud-adjacent filtering strategy, which reduced the graph to 1,791 accounts. While this filtering preserved structural patterns relevant to our target typologies, it eliminated potentially informative context from the broader transaction network. Real-world AML systems operate over graphs with millions of accounts and billions of transactions; our filtered subset, while suitable for proof-of-concept evaluation, may not capture the full diversity of laundering behaviors or the complexity of modern financial networks.
 
-    
+
 
     </p>
     <p> Pattern Coverage and Generalization
