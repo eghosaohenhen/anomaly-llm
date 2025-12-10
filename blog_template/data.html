@@ -350,10 +350,9 @@
           explores the feasibility of scalable, explainable AML detectors
           distilled from expert LLMs.
         </p>
-        <section>
-          <h2>Methodology</h2>
 
-		  <h3>Teacher Model Construction</h3>
+        <section>
+          <h2>Teacher Model Construction</h2>
 
           <p>
             To generate high-quality supervisory signals for student
@@ -411,11 +410,67 @@
             negative cases unrelated to their specialization.
           </p>
         </section>
-		<section>
-		  <h2>Discussion</h2>
-		  <h3>Overview</h3>
-		  <h3>Teacher Evaluation Results</h3>
-		  <img src="./images/teacher-eval-95.png" width="512px" />
+        <section>
+          <h2>Teacher Model Construction</h2>
+
+          <p>
+            To generate high-quality supervisory signals for student
+            fine-tuning, we instantiated pattern-specialized teacher LLMs using
+            <strong>gpt-4o</strong>, following the same base model choice as
+            Pirmorad et al. We initially envisioned constructing eight teacher
+            models, each dedicated to identifying one of the eight common
+            money-laundering typologies. Due to time constraints, we focused on
+            two representative patterns—<strong>fan-in</strong> and
+            <strong>stack</strong>—and trained a separate teacher for each. Each
+            teacher’s objective was to reliably distinguish serialized subgraphs
+            corresponding to its specialized pattern from benign
+            (non-laundering) subgraphs.
+          </p>
+
+          <p>
+            Each teacher model operated within a
+            <strong>few-shot prompting framework</strong>. Prompts began with a
+            definition of the task, a description of possible node and edge
+            types, and a curated block of serialized subgraphs. For the few-shot
+            examples, we constructed balanced sets of positive
+            (pattern-specific) and negative (non-laundering) subgraphs using the
+            pattern annotations provided in the dataset by Altman et al. These
+            exemplars were paired with concise explanations of the relevant
+            typology to help the teacher specialize.
+          </p>
+
+          <p>
+            After the few-shot block, each prompt concluded with a
+            <strong>test subgraph serialization</strong> and instructions
+            directing the model to (i) classify the subgraph as
+            <em>Suspicious</em> or <em>Not Suspicious</em>, (ii) provide a brief
+            rationale, and (iii) state explicitly whether the teacher’s
+            specialized pattern was present. Teacher outputs were constrained to
+            a structured JSON format:
+          </p>
+
+          <pre>
+			<code>{
+			"conclusion": "Suspicious" | "Not Suspicious",
+			"observed_pattern": "&lt;pattern-name or none&gt;",
+			"rationale": "&lt;2–3 sentence explanation&gt;"
+			}
+			</code>
+			</pre>
+
+          <p>
+            To evaluate the teachers, we curated a separate test set consisting
+            of fan-in, stack, and normal subgraphs that were <em>not</em> used
+            in the few-shot block. Each teacher was evaluated only on subgraphs
+            containing its own pattern or normal subgraphs, intentionally
+            avoiding cross-typology classification. This design choice ensured
+            that teachers produced highly precise positive examples for
+            downstream student training, rather than being weakened by harder
+            negative cases unrelated to their specialization.
+          </p>
+        </section>
+
+        <img src="./images/teacher-eval-95.png" width="512px" />
 
         <img src="./images/teacher-eval-table.png" width="512px" />
         <p>
@@ -427,17 +482,6 @@
           and misses many true stack patterns despite a similar level of
           statistical uncertainty (CI ±0.2787).
         </p>
-		<h3>Student Evaluation Results</h3>
-		<h3>Limitations and Challenges</h3>
-		</section>
-		<section>
-			<h2>Conclusion</h2>
-			<h2>Future Work</h2>
-
-		</section>
-		
-
-        
       </div>
     </div>
 
