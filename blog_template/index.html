@@ -411,7 +411,7 @@
             negative cases unrelated to their specialization.
           </p>
 
-		  <h3>Methodology – Student Model Distillation</h3>
+		  <h3>Student Model Distillation</h3>
 		<p>
 		To compress the behavior of our pattern-specialized teachers into a more deployable model, we train a compact student LLM via supervised knowledge distillation. The student’s goal is to mimic the teachers’ structured outputs on serialized transaction subgraphs, so that at inference time we can rely on a single lightweight model instead of repeatedly querying large external LLMs. We use a Tinker-managed fine-tuning workflow, which allows us to fine-tune gated Llama models without downloading them locally. In all experiments the student is an autoregressive decoder-only model, instantiated as either a 1B-parameter or 3B-parameter Llama-3.2 variant. Unless otherwise noted, we use a batch size of 16, learning rate of 1e-4, and a single epoch; Tinker logs training and validation negative log-likelihood (NLL) as our primary optimization signal.
 		</p>
