@@ -351,7 +351,115 @@
         <section>
           <h2>Methodology</h2>
 
-		  <a href="./data.html">Dataset Construction and Preprocessing</a>
+
+          <h3>Data Sourcing</h3>
+          <p>
+            We study transaction-level anomaly detection on a financial graph,
+            where vertices correspond primarily to accounts and edges correspond
+            to money transfers between accounts. Each edge carries attributes
+            such as timestamp, amount, currency, and payment format, and is
+            labeled as either laundering-related or normal activity. Following
+            Pirmorad (2025), we used an open source dataset generated from
+            AMLworld[1], a synthetic financial transaction dataset generator
+            based on the
+            <strong
+              >IBM AML Synthetic Dataset developed by Altman (2023) for more
+              realistic transactions [2]</strong
+            >
+            . The dataset we used is part of a collection of 6 datasets
+            available on Kaggle. The collection has the 6 datasets split into 2
+            groups, HI and LI, where HI datasets have a higher illicit
+            transaction ratio compared to the LI datasets (lower illicit). Each
+            group has a small, medium and large dataset which range from 5M to
+            180M transactions. More information about the dataset collection can
+            be seen in the figure below.
+          </p>
+          <img src="./data_images/altman.png" width="512px" />
+          <h3>Data Selection</h3>
+          <p>
+            While Pirmorad (2025) employed the HI-Small variant, we selected
+            LI-Small to balance realism with computational constraints, as the
+            lower illicit ratio (while still substantial) better reflects
+            real-world AML scenarios where suspicious transactions constitute a
+            minority of total activity.
+          </p>
+          <br />
+          <h4>Sampling Strategy</h4>
+          <p>
+            Rather than random sampling from the full dataset, we adopted a
+            pattern-centric approach focused on two specific laundering
+            typologies: fan-in and stack patterns. This decision was motivated
+            by Pirmorad's (2025) findings that pattern complexity significantly
+            affects LLM detection performance. He found that fan-in patterns
+            demonstrated high predictability (precision 73.8%, recall 81.5%),
+            while stack patterns proved more challenging (precision 52.0%,
+            recall 58.0%). By concentrating on these contrasting cases, we aimed
+            to construct a dataset that would expose both the strengths and
+            limitations of the teacher-student distillation framework.
+          </p>
+          <br />
+
+          <p>
+            To ensure meaningful representation of non-laundering activity, we
+            implemented a fraud-adjacent filtering strategy: we retained only
+            transactions where at least one participating account had been
+            involved in a stack or fan-in transaction elsewhere in the graph.
+            This approach yielded structurally relevant negative examples, where
+            the accounts and relationships between normal and laundering
+            patterns were similar. We hoped that with this approach, the model
+            could not just associate an account with laundering activity
+            (overfitting to the wrong characteristic) but instead have to focus
+            on the coordinated, multi-hop characteristics that distinguish
+            actual suspicious activity. This filtering reduced our graph from
+            the full LI-Small dataset with 705K transactions to a more
+            computationally tractable subgraph of 1,791 unique accounts.
+          </p>
+          <br />
+          <br />
+          <h3>Graph Construction</h3>
+          <p>
+            We constructed the transaction graph using the igraph library rather
+            than implementing custom breadth-first search traversal. This design
+            choice was driven by computational efficiency: igraph's optimized
+            C-based backend enables direct k-hop neighborhood extraction via
+            .neighborhood(k) calls, avoiding the need to maintain explicit
+            neighbor lists or repeatedly iterate through edge
+            dataframes—operations that scale poorly with graph density, which
+            was key as inital tests revealed the high out-degree characteristic
+            of the L1-small dataset, an inital test with no filtering had 614
+            transactions in a k = 2 neighborhood. Our filtered graph contained
+            1,791 vertices (accounts) connected by thousands of directed edges
+            (transactions), with each edge annotated with transaction metadata
+            (timestamp, amount, currency, payment format) and labels (Is
+            Laundering, Pattern).
+          </p>
+          <h3>Graph Visualizations</h3>
+          <p>
+            Here is a visualization of a 100 node subgraph sampled from the
+            full graph. Nodes are colored based on their involvement in
+            laundering patterns (red for supicious accounts, blue for normal). Edges represent transactions between accounts.
+          </p>
+          <img src="./data_images/graph.png" width="512px" />
+          <p> Here are example patterns extracted from the graph.</p>
+          <img src="./data_images/normal_1.png" width="512px" />
+          <img src="./data_images/fan_in.png" width="512px" />
+          <img src="./data_images/stack_1.png" width="512px" />
+
+          <h3>Dataset Partitioning</h3>
+          <img src="./data_images/sampled_data_table.png" width="512px" />
+          <p></p>
+          <caption style="opacity: 50%">
+            Graph summary: Number of vertices (accounts): 1797 Number of edges
+            (transactions): 15087
+          </caption>
+
+          <p>
+            To prevent information leakage, we ensured strict separation: no
+            transaction or account appearing in teacher training data was
+            included in validation or test sets. Pattern distribution was
+            stratified across splits to maintain balanced representation.
+          </p>
+        
 
 		  <h3>Teacher Model Construction</h3>
 
@@ -475,6 +583,16 @@
 			for us to use on this project as well as a limitation on the methodology of using text serializations of
 			subgraphs.
 		</p>
+    <p> The token limitation required aggressive pruning (max 50 nodes) that may have discarded relevant contextual information. The distance-based truncation strategy prioritizes topological proximity but cannot distinguish between structurally critical paths and redundant connections. As a result, some serializations may present incomplete or misleading representations of the true pattern.</p>
+    <p>
+      RAM Constraints: The full LI-Small dataset, while modest by production standards, exceeded available memory when represented as an igraph object with full edge attributes and metadata. This necessitated our fraud-adjacent filtering strategy, which reduced the graph to 1,791 accounts. While this filtering preserved structural patterns relevant to our target typologies, it eliminated potentially informative context from the broader transaction network. Real-world AML systems operate over graphs with millions of accounts and billions of transactions; our filtered subset, while suitable for proof-of-concept evaluation, may not capture the full diversity of laundering behaviors or the complexity of modern financial networks.
+
+    
+
+    </p>
+    <p> Pattern Coverage and Generalization
+Our deliberate focus on only two laundering patterns (fan-in and stack) represents a significant limitation in terms of generalizability. Pirmorad (2025) evaluated eight canonical typologies; by restricting to two, we cannot assess whether the teacher-student approach generalizes to the full spectrum of laundering behaviors. This narrow scope was a pragmatic necessity given computational constraints, but it means our findings may not extrapolate to patterns with different structural properties—particularly less organized behaviors like random or bipartite patterns that proved challenging for single-model LLMs in prior work.
+</p>
 		</section>
 		<section>
 			<h2>Conclusion</h2>

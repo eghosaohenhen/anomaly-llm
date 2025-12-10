@@ -5,179 +5,203 @@
     <link rel="shortcut icon" href="images/icon.ico" />
     <style type="text/css">
       body {
-      	background-color: #f5f9ff;
+        background-color: #f5f9ff;
       }
 
       /* Hide both math displays initially, will display based on JS detection */
-       .mathjax-mobile, .mathml-non-mobile { display: none; }
+      .mathjax-mobile,
+      .mathml-non-mobile {
+        display: none;
+      }
 
-       /* Show the MathML content by default on non-mobile devices */
-       .show-mathml .mathml-non-mobile { display: block; }
-       .show-mathjax .mathjax-mobile { display: block; }
+      /* Show the MathML content by default on non-mobile devices */
+      .show-mathml .mathml-non-mobile {
+        display: block;
+      }
+      .show-mathjax .mathjax-mobile {
+        display: block;
+      }
 
       .content-margin-container {
-      	display: flex;
-      	width: 100%; /* Ensure the container is full width */
-      	justify-content: left; /* Horizontally centers the children in the container */
-      	align-items: center;  /* Vertically centers the children in the container */
+        display: flex;
+        width: 100%; /* Ensure the container is full width */
+        justify-content: left; /* Horizontally centers the children in the container */
+        align-items: center; /* Vertically centers the children in the container */
       }
       .main-content-block {
-      	width: 70%; /* Change this percentage as needed */
-         max-width: 1100px; /* Optional: Maximum width */
-      	background-color: #fff;
-      	border-left: 1px solid #DDD;
-      	border-right: 1px solid #DDD;
-      	padding: 8px 8px 8px 8px;
-      	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        width: 70%; /* Change this percentage as needed */
+        max-width: 1100px; /* Optional: Maximum width */
+        background-color: #fff;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 8px 8px 8px 8px;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+          "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
       }
       .margin-left-block {
-      		font-size: 14px;
-      		width: 15%; /* Change this percentage as needed */
-      		max-width: 130px; /* Optional: Maximum width */
-      		position: relative;
-      		margin-left: 10px;
-      		text-align: left;
-      		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-      		padding: 5px;
+        font-size: 14px;
+        width: 15%; /* Change this percentage as needed */
+        max-width: 130px; /* Optional: Maximum width */
+        position: relative;
+        margin-left: 10px;
+        text-align: left;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+          "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        padding: 5px;
       }
       .margin-right-block {
-      		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-      		font-size: 14px;
-      		width: 25%; /* Change this percentage as needed */
-      		max-width: 256px; /* Optional: Maximum width */
-      		position: relative;
-      		text-align: left;
-      		padding: 10px;  /* Optional: Adds padding inside the caption */
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+          "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-size: 14px;
+        width: 25%; /* Change this percentage as needed */
+        max-width: 256px; /* Optional: Maximum width */
+        position: relative;
+        text-align: left;
+        padding: 10px; /* Optional: Adds padding inside the caption */
       }
 
       img {
-      		max-width: 100%; /* Make sure it fits inside the container */
-      		height: auto;
-      		display: block;
-      		margin: auto;
+        max-width: 100%; /* Make sure it fits inside the container */
+        height: auto;
+        display: block;
+        margin: auto;
       }
       .my-video {
-      		max-width: 100%; /* Make sure it fits inside the container */
-      		height: auto;
-      		display: block;
-      		margin: auto;
+        max-width: 100%; /* Make sure it fits inside the container */
+        height: auto;
+        display: block;
+        margin: auto;
       }
       /* Hide both video displays initially, will display based on JS detection */
-       .vid-mobile, .vid-non-mobile { display: none; }
+      .vid-mobile,
+      .vid-non-mobile {
+        display: none;
+      }
 
-       /* Show the video content by default on non-mobile devices */
-       .show-vid-mobile .vid-mobile { display: block; }
-       .show-vid-non-mobile .vid-non-mobile { display: block; }
+      /* Show the video content by default on non-mobile devices */
+      .show-vid-mobile .vid-mobile {
+        display: block;
+      }
+      .show-vid-non-mobile .vid-non-mobile {
+        display: block;
+      }
 
-      a:link,a:visited
-      {
-      	color: #0e7862; /*#1367a7;*/
-      	text-decoration: none;
+      a:link,
+      a:visited {
+        color: #0e7862; /*#1367a7;*/
+        text-decoration: none;
       }
       a:hover {
-      	color: #24b597; /*#208799;*/
+        color: #24b597; /*#208799;*/
       }
 
       h1 {
-      	font-size: 18px;
-      	margin-top: 4px;
-      	margin-bottom: 10px;
+        font-size: 18px;
+        margin-top: 4px;
+        margin-bottom: 10px;
       }
 
       table.header {
-         font-weight: 300;
-         font-size: 17px;
-         flex-grow: 1;
-      	width: 70%;
-         max-width: calc(100% - 290px); /* Adjust according to the width of .paper-code-tab */
+        font-weight: 300;
+        font-size: 17px;
+        flex-grow: 1;
+        width: 70%;
+        max-width: calc(
+          100% - 290px
+        ); /* Adjust according to the width of .paper-code-tab */
       }
-      table td, table td * {
-          vertical-align: middle;
-          position: relative;
+      table td,
+      table td * {
+        vertical-align: middle;
+        position: relative;
       }
       table.paper-code-tab {
-          flex-shrink: 0;
-          margin-left: 8px;
-          margin-top: 8px;
-          padding: 0px 0px 0px 8px;
-          width: 290px;
-          height: 150px;
+        flex-shrink: 0;
+        margin-left: 8px;
+        margin-top: 8px;
+        padding: 0px 0px 0px 8px;
+        width: 290px;
+        height: 150px;
       }
 
-      .layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
-      	box-shadow:
-      	        0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
-      	        5px 5px 0 0px #fff, /* The second layer */
-      	        5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
-      	        10px 10px 0 0px #fff, /* The third layer */
-      	        10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
-      	margin-top: 5px;
-      	margin-left: 10px;
-      	margin-right: 30px;
-      	margin-bottom: 5px;
+      .layered-paper {
+        /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The top layer shadow */ 5px 5px 0 0px #fff,
+          /* The second layer */ 5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The second layer shadow */ 10px 10px 0 0px #fff,
+          /* The third layer */ 10px 10px 1px 1px rgba(0, 0, 0, 0.35); /* The third layer shadow */
+        margin-top: 5px;
+        margin-left: 10px;
+        margin-right: 30px;
+        margin-bottom: 5px;
       }
 
       hr {
-         height: 1px; /* Sets the height of the line to 1 pixel */
-         border: none; /* Removes the default border */
-         background-color: #DDD; /* Sets the line color to black */
-       }
+        height: 1px; /* Sets the height of the line to 1 pixel */
+        border: none; /* Removes the default border */
+        background-color: #ddd; /* Sets the line color to black */
+      }
 
       div.hypothesis {
-      	width: 80%;
-      	background-color: #EEE;
-      	border: 1px solid black;
-      	border-radius: 10px;
-      	-moz-border-radius: 10px;
-      	-webkit-border-radius: 10px;
-      	font-family: Courier;
-      	font-size: 18px;
-      	text-align: center;
-      	margin: auto;
-      	padding: 16px 16px 16px 16px;
+        width: 80%;
+        background-color: #eee;
+        border: 1px solid black;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        font-family: Courier;
+        font-size: 18px;
+        text-align: center;
+        margin: auto;
+        padding: 16px 16px 16px 16px;
       }
 
       div.citation {
-         font-size: 0.8em;
-         background-color:#fff;
-         padding: 10px;
-      	height: 200px;
-       }
+        font-size: 0.8em;
+        background-color: #fff;
+        padding: 10px;
+        height: 200px;
+      }
 
       .fade-in-inline {
-      	position: absolute;
-      	text-align: center;
-      	margin: auto;
-      	-webkit-mask-image: linear-gradient(to right,
-      																		transparent 0%,
-      																		transparent 40%,
-      																		black 50%,
-      																		black 90%,
-      																		transparent 100%);
-      	mask-image: linear-gradient(to right,
-      															transparent 0%,
-      															transparent 40%,
-      															black 50%,
-      															black 90%,
-      															transparent 100%);
-      	-webkit-mask-size: 8000% 100%;
-      	mask-size: 8000% 100%;
-      	animation-name: sweepMask;
-      	animation-duration: 4s;
-      	animation-iteration-count: infinite;
-      	animation-timing-function: linear;
-      	animation-delay: -1s;
+        position: absolute;
+        text-align: center;
+        margin: auto;
+        -webkit-mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          transparent 40%,
+          black 50%,
+          black 90%,
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          transparent 40%,
+          black 50%,
+          black 90%,
+          transparent 100%
+        );
+        -webkit-mask-size: 8000% 100%;
+        mask-size: 8000% 100%;
+        animation-name: sweepMask;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-delay: -1s;
       }
 
       .fade-in2-inline {
-      		animation-delay: 1s;
+        animation-delay: 1s;
       }
 
       .inline-div {
-      		position: relative;
-          display: inline-block; /* Makes both the div and paragraph inline-block elements */
-          vertical-align: top; /* Aligns them at the top, you can adjust this to middle, bottom, etc., based on your needs */
-          width: 50px; /* Optional: Adds space between the div and the paragraph */
+        position: relative;
+        display: inline-block; /* Makes both the div and paragraph inline-block elements */
+        vertical-align: top; /* Aligns them at the top, you can adjust this to middle, bottom, etc., based on your needs */
+        width: 50px; /* Optional: Adds space between the div and the paragraph */
       }
     </style>
 
@@ -254,339 +278,117 @@
     <div class="content-margin-container" id="intro">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
-        <h1>Introduction</h1>
-        <h2>Motivation</h2>
-        <p>
-          Designing systems to detect anomalies in complex relational data while
-          remaining interpretable is a key challenge in AI. A particularly
-          important domain for this is financial transaction monitoring, where
-          missed anomalies can facilitate fraud and false alarms can disrupt
-          normal activity. Detecting such behavior is inherently a graph
-          problem, as illicit funds follow structured patterns across accounts
-          and intermediaries. Graph-based methods like GNNs achieve strong
-          predictive performance but are typically opaque, offering little
-          human-interpretable insight into why a transaction was flagged, and
-          require extensive labeled data and infrastructure to train and deploy.
-          As such, Large Language Models (LLMs) provide a potential alternative
-          way to reason over graph-structured financial data.
-        </p>
-        <h2>Background and Related Work</h2>
-        <p>
-          Traditional graph-based approaches, including Graph Neural Networks
-          (GNNs), learn latent representations to flag suspicious patterns and
-          have demonstrated strong performance across various fraud detection
-          tasks. Yet, these models are typically opaque, offering limited
-          interpretability and little insight into why a transaction was
-          flagged. This limitation has motivated a shift toward using Large
-          Language Models (LLMs) as reasoning engines over graph-structured
-          financial data. Synthetic AML benchmarks, such as the IBM anti–money
-          laundering dataset, simulate canonical laundering typologies—including
-          fan-in, fan-out, gather-scatter, scatter-gather, simple cycle, random,
-          bipartite, and stack—which provide labeled transaction graphs in a
-          domain where real, sensitive data are scarce (Altman et al., 2023).
-          These typologies also form the pattern vocabulary used in recent
-          LLM-based AML experiments.
-        </p>
-        <p>
-          LLMs offer a promising alternative for reasoning over transaction
-          graphs. Pirmorad (2025) demonstrates that serializing local k-hop
-          neighborhoods around candidate transactions into text allows a
-          general-purpose LLM to emulate an investigator’s reasoning: assessing
-          suspiciousness and producing natural-language justifications. This
-          approach enables LLMs to act as interpretable “reasoning heads,”
-          combining structural graph signals with rich prior knowledge. However,
-          applying LLMs naively to every candidate transaction is
-          computationally expensive, and their tendency to hallucinate—producing
-          plausible but unsupported explanations—poses a major risk in
-          high-stakes domains like AML. Moreover, large graphs often exceed
-          context limits, forcing LLM reasoning to focus on local subgraphs and
-          potentially missing broader, global patterns.
-        </p>
-        <p>
-          To address these challenges, recent work has explored multi-agent LLM
-          reasoning frameworks. Hu et al. (2024) introduce a system in which
-          multiple specialized LLM agents jointly reason over subgraph-centric
-          tasks, aggregating their partial results to produce a final decision.
-          This distributed approach reduces the computational burden on any
-          single model and improves robustness through ensemble-like consensus,
-          though it introduces additional orchestration complexity.
-        </p>
-        <p>
-          Complementary to this, the teacher–student paradigm offers a way to
-          combine the strengths of large, expressive LLMs with the efficiency of
-          smaller models. Knowledge distillation (Hinton et al., 2015) allows a
-          compact student model to learn both the outputs and intermediate
-          reasoning traces of a teacher. Hsieh et al. (2023) demonstrate that
-          chain-of-thought reasoning from very large models can be distilled
-          into smaller LLMs with minimal loss in performance, effectively
-          transferring both answers and explanation styles.<br />
-        </p>
-        <p>
-          Our work sits at the intersection of these trends. We adopt LLM-based
-          graph reasoning for AML (Pirmorad, 2025), specialize multiple teacher
-          agents as pattern experts in a multi-agent framework (Hu et al.,
-          2024), and distill their judgments into a single, compact student
-          model using supervised distillation techniques inspired by Hinton et
-          al. (2015) and Hsieh et al. (2023). This design aims to balance
-          interpretability, accuracy, and computational efficiency in
-          high-stakes AML reasoning.
-        </p>
-        <h2>Goals</h2>
-        <p>
-          In this project, we investigate whether a smaller student LLM can
-          learn pattern-aware AML reasoning by distilling knowledge from larger,
-          pattern-specialized teacher LLMs. We focus on two accepted laundering
-          typologies—fan-in and fan-out—using a transactional graph derived from
-          a realistic AML benchmark, aiming to show that this approach can
-          extend to other patterns. For each typology, a teacher LLM acts as a
-          specialist, producing structured judgments (suspicious/not suspicious,
-          pattern label, and explanation) for k-hop subgraphs around candidate
-          transactions. We then fine-tune a compact student model to imitate
-          these teachers via supervised distillation. Our key questions are: (1)
-          Can a small student approximate the pattern-level judgments of larger
-          teachers? and (2) How do factors like teacher data volume,
-          neighborhood radius k, number of teachers, and inclusion of teacher
-          rationales affect student performance and interpretability? This study
-          explores the feasibility of scalable, explainable AML detectors
-          distilled from expert LLMs.
-        </p>
-
         <section>
-          <h3>Data Source </h3>
+          <h3>Data Sourcing</h3>
           <p>
-            
-
-            We study transaction-level anomaly detection on a financial graph, where vertices correspond primarily to accounts and edges correspond to money transfers between accounts. Each edge carries attributes such as timestamp, amount, currency, and payment format, and is labeled as either laundering-related or normal activity. Following Pirmorad (2025), we used an open source dataset generated from AMLworld[1], a synthetic financial transaction dataset generator based on the <strong>IBM AML Synthetic Dataset developed by Altman (2023) for more realistic transactions [2]</strong> . The dataset we used is part of a collection of 6 datasets available on Kaggle. The collection has the 6 datasets split into 2 groups, HI and LI, where HI datasets have a higher illicit transaction ratio compared to the LI datasets (lower illicit). Each group has a small, medium and large dataset which range from 5M to 180M transactions.  More information about the dataset collection can be seen in the figure below. 
+            We study transaction-level anomaly detection on a financial graph,
+            where vertices correspond primarily to accounts and edges correspond
+            to money transfers between accounts. Each edge carries attributes
+            such as timestamp, amount, currency, and payment format, and is
+            labeled as either laundering-related or normal activity. Following
+            Pirmorad (2025), we used an open source dataset generated from
+            AMLworld[1], a synthetic financial transaction dataset generator
+            based on the
+            <strong
+              >IBM AML Synthetic Dataset developed by Altman (2023) for more
+              realistic transactions [2]</strong
+            >
+            . The dataset we used is part of a collection of 6 datasets
+            available on Kaggle. The collection has the 6 datasets split into 2
+            groups, HI and LI, where HI datasets have a higher illicit
+            transaction ratio compared to the LI datasets (lower illicit). Each
+            group has a small, medium and large dataset which range from 5M to
+            180M transactions. More information about the dataset collection can
+            be seen in the figure below.
           </p>
           <img src="./data_images/altman.png" width="512px" />
           <h3>Data Selection</h3>
-          <p> While Pirmorad (2025) employed the HI-Small variant, we selected LI-Small to balance realism with computational constraints, as the lower illicit ratio (while still substantial) better reflects real-world AML scenarios where suspicious transactions constitute a minority of total activity.</p>
-
-          <br>
-          <h4> Sampling Strategy</h4>
-          <p> Rather than random sampling from the full dataset, we adopted a pattern-centric approach focused on two specific laundering typologies: fan-in and stack patterns. This decision was motivated by Pirmorad's (2025) findings that pattern complexity significantly affects LLM detection performance. He found that fan-in patterns demonstrated high predictability (precision 73.8%, recall 81.5%), while stack patterns proved more challenging (precision 52.0%, recall 58.0%). By concentrating on these contrasting cases, we aimed to construct a dataset that would expose both the strengths and limitations of the teacher-student distillation framework. </p>
-        </br>
-        
-        <p> To ensure meaningful representation of non-laundering activity, we implemented a fraud-adjacent filtering strategy: we retained only transactions where at least one participating account had been involved in a stack or fan-in transaction elsewhere in the graph. This approach yielded structurally relevant negative examples, where the accounts and relationships between normal and laundering patterns were similar. We hoped that with this approach, the model could not just associate an account with laundering activity (overfitting to the wrong characteristic) but instead have to focus on the coordinated, multi-hop characteristics that distinguish actual suspicious activity. This filtering reduced our graph from the full LI-Small dataset with 705K transactions to a more computationally tractable subgraph of 1,791 unique accounts.
-</p>
-<br>
-<br>
-<h3> Graph Construction</h3>
-<p> We constructed the transaction graph using the igraph library rather than implementing custom breadth-first search traversal. This design choice was driven by computational efficiency: igraph's optimized C-based backend enables direct k-hop neighborhood extraction via .neighborhood(k) calls, avoiding the need to maintain explicit neighbor lists or repeatedly iterate through edge dataframes—operations that scale poorly with graph density, which was key as inital tests revealed the high out-degree characteristic of the L1-small dataset, an inital test with no filtering had 614 transactions in a k = 2 neighborhood. Our filtered graph contained 1,791 vertices (accounts) connected by thousands of directed edges (transactions), with each edge annotated with transaction metadata (timestamp, amount, currency, payment format) and labels (Is Laundering, Pattern).</p>
-<h3> Dataset Partitioning</h3>
-<img src="./data_images/sampled_data_table.png" width="512px" />
-          <p></p>
-          <p> Graph summary:
-Number of vertices (accounts): 1797
-Number of edges (transactions): 15087</p>
-
           <p>
-            Design Choices with Data Selection
-We chose the LI-Small variant but Pimorad chose the HI-Small variant but doesn’t matter cuz we didn’t do random sampling from the whole dataset 
-Small variants because compute problems
-RAM and Computation time 
-Pattern Representation in our Dataset: Pimorad claims that the nature of the patterns affected the performance of the LLMs on identifying the pattern. Focused on two patterns in the dataset. One was stack which the Pimorad didn’t perform well, other was 
-Data storage
-Used dataframes for memory efficient queries across dataset vs regular python list 
-
-
-
+            While Pirmorad (2025) employed the HI-Small variant, we selected
+            LI-Small to balance realism with computational constraints, as the
+            lower illicit ratio (while still substantial) better reflects
+            real-world AML scenarios where suspicious transactions constitute a
+            minority of total activity.
           </p>
-
-          <p>
-            Each teacher model operated within a
-            <strong>few-shot prompting framework</strong>. Prompts began with a
-            definition of the task, a description of possible node and edge
-            types, and a curated block of serialized subgraphs. For the few-shot
-            examples, we constructed balanced sets of positive
-            (pattern-specific) and negative (non-laundering) subgraphs using the
-            pattern annotations provided in the dataset by Altman et al. These
-            exemplars were paired with concise explanations of the relevant
-            typology to help the teacher specialize.
-          </p>
-
-          <p>
-            After the few-shot block, each prompt concluded with a
-            <strong>test subgraph serialization</strong> and instructions
-            directing the model to (i) classify the subgraph as
-            <em>Suspicious</em> or <em>Not Suspicious</em>, (ii) provide a brief
-            rationale, and (iii) state explicitly whether the teacher’s
-            specialized pattern was present. Teacher outputs were constrained to
-            a structured JSON format:
-          </p>
-
-          <pre>
-			<code>{
-			"conclusion": "Suspicious" | "Not Suspicious",
-			"observed_pattern": "&lt;pattern-name or none&gt;",
-			"rationale": "&lt;2–3 sentence explanation&gt;"
-			}
-			</code>
-			</pre>
-
-          <p>
-            To evaluate the teachers, we curated a separate test set consisting
-            of fan-in, stack, and normal subgraphs that were <em>not</em> used
-            in the few-shot block. Each teacher was evaluated only on subgraphs
-            containing its own pattern or normal subgraphs, intentionally
-            avoiding cross-typology classification. This design choice ensured
-            that teachers produced highly precise positive examples for
-            downstream student training, rather than being weakened by harder
-            negative cases unrelated to their specialization.
-          </p>
-        </section>
-        <section>
-          <h2>Teacher Model Construction</h2>
-
-          <p>
-            To generate high-quality supervisory signals for student
-            fine-tuning, we instantiated pattern-specialized teacher LLMs using
-            <strong>gpt-4o</strong>, following the same base model choice as
-            Pirmorad et al. We initially envisioned constructing eight teacher
-            models, each dedicated to identifying one of the eight common
-            money-laundering typologies. Due to time constraints, we focused on
-            two representative patterns—<strong>fan-in</strong> and
-            <strong>stack</strong>—and trained a separate teacher for each. Each
-            teacher’s objective was to reliably distinguish serialized subgraphs
-            corresponding to its specialized pattern from benign
-            (non-laundering) subgraphs.
-          </p>
-
-          <p>
-            Each teacher model operated within a
-            <strong>few-shot prompting framework</strong>. Prompts began with a
-            definition of the task, a description of possible node and edge
-            types, and a curated block of serialized subgraphs. For the few-shot
-            examples, we constructed balanced sets of positive
-            (pattern-specific) and negative (non-laundering) subgraphs using the
-            pattern annotations provided in the dataset by Altman et al. These
-            exemplars were paired with concise explanations of the relevant
-            typology to help the teacher specialize.
-          </p>
-
-          <p>
-            After the few-shot block, each prompt concluded with a
-            <strong>test subgraph serialization</strong> and instructions
-            directing the model to (i) classify the subgraph as
-            <em>Suspicious</em> or <em>Not Suspicious</em>, (ii) provide a brief
-            rationale, and (iii) state explicitly whether the teacher’s
-            specialized pattern was present. Teacher outputs were constrained to
-            a structured JSON format:
-          </p>
-
-          <pre>
-			<code>{
-			"conclusion": "Suspicious" | "Not Suspicious",
-			"observed_pattern": "&lt;pattern-name or none&gt;",
-			"rationale": "&lt;2–3 sentence explanation&gt;"
-			}
-			</code>
-			</pre>
-
-          <p>
-            To evaluate the teachers, we curated a separate test set consisting
-            of fan-in, stack, and normal subgraphs that were <em>not</em> used
-            in the few-shot block. Each teacher was evaluated only on subgraphs
-            containing its own pattern or normal subgraphs, intentionally
-            avoiding cross-typology classification. This design choice ensured
-            that teachers produced highly precise positive examples for
-            downstream student training, rather than being weakened by harder
-            negative cases unrelated to their specialization.
-          </p>
-        </section>
-
-        <img src="./images/teacher-eval-95.png" width="512px" />
-
-        <img src="./images/teacher-eval-table.png" width="512px" />
-        <p>
-          The fan-in teacher achieves moderate precision (0.50) but high recall
-          (0.83), indicating it correctly flags most true fan-in cases at the
-          cost of a fair number of false positives (CI ±0.2634). In contrast,
-          the stack teacher has somewhat higher precision (0.625) but
-          substantially lower recall (0.31), suggesting it is more conservative
-          and misses many true stack patterns despite a similar level of
-          statistical uncertainty (CI ±0.2787).
-        </p>
-      </div>
-    </div>
-
-    <div class="content-margin-container" id="does_x_do_y">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <h1>Does X do Y?</h1>
-        It is well known that Y does Y. And this has raised the question does X
-        do Y? Because if Y does Y then it stands to reason that X does Y. But we
-        cannot answer this until we realize the Z implies Y and X can be linked
-        to Z.<br /><br />
-
-        Now let's write some math!<br />
-        <center>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <mrow>
-              <mrow>
-                <mo>&#x2202;</mo>
-                <mi>y</mi>
-              </mrow>
-              <mo>/</mo>
-              <mrow>
-                <mo>&#x2202;</mo>
-                <mi>x</mi>
-              </mrow>
-            </mrow>
-            <mo>=</mo>
-            <mi>x</mi>
-          </math>
-        </center>
-        <br />
-        It's probably best to ask an LLM to help do the web formatting for math.
-        You can tell it "convert this latex equation into MathML:
-        $$\frac{\partial dy}{\partial dx} = x$$" But it took me a few tries. So,
-        if you get frustrated, you can embed an image of the equation, or use
-        other packages for rendering equations on webpages.
-      </div>
-      <div class="margin-right-block" style="transform: translate(0%, -100%)">
-        <!-- you can move the margin notes up and down with translate -->
-        Interestingly, Plato also asked if X does Y, in
-        <a href="#ref_1">[1]</a>.
-      </div>
-    </div>
-
-    <div class="content-margin-container">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <h1>Another section</h1>
-        In this section we embed a video:
-        <video class="my-video" loop autoplay muted style="width: 725px">
-          <source src="./images/mtsh.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="margin-right-block">
-        A caption for the video could go here.
-      </div>
-    </div>
-
-    <div class="content-margin-container" id="implications_and_limitations">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <h1>Implications and limitations</h1>
-      </div>
-      <div class="margin-right-block"></div>
-    </div>
-
-    <div class="content-margin-container" id="citations">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <div class="citation" id="references" style="height: auto">
           <br />
-          <span style="font-size: 16px">References:</span><br /><br />
-          <a id="ref_1"></a>[1]
-          <a href="https://en.wikipedia.org/wiki/Allegory_of_the_cave"
-            >Allegory of the Cave</a
-          >, Plato, c. 375 BC<br /><br />
-          <a id="ref_2"></a>[2] <a href="">A Human-Level AGI</a>, OpenAI,
-          2025<br /><br />
-        </div>
+          <h4>Sampling Strategy</h4>
+          <p>
+            Rather than random sampling from the full dataset, we adopted a
+            pattern-centric approach focused on two specific laundering
+            typologies: fan-in and stack patterns. This decision was motivated
+            by Pirmorad's (2025) findings that pattern complexity significantly
+            affects LLM detection performance. He found that fan-in patterns
+            demonstrated high predictability (precision 73.8%, recall 81.5%),
+            while stack patterns proved more challenging (precision 52.0%,
+            recall 58.0%). By concentrating on these contrasting cases, we aimed
+            to construct a dataset that would expose both the strengths and
+            limitations of the teacher-student distillation framework.
+          </p>
+          <br />
+
+          <p>
+            To ensure meaningful representation of non-laundering activity, we
+            implemented a fraud-adjacent filtering strategy: we retained only
+            transactions where at least one participating account had been
+            involved in a stack or fan-in transaction elsewhere in the graph.
+            This approach yielded structurally relevant negative examples, where
+            the accounts and relationships between normal and laundering
+            patterns were similar. We hoped that with this approach, the model
+            could not just associate an account with laundering activity
+            (overfitting to the wrong characteristic) but instead have to focus
+            on the coordinated, multi-hop characteristics that distinguish
+            actual suspicious activity. This filtering reduced our graph from
+            the full LI-Small dataset with 705K transactions to a more
+            computationally tractable subgraph of 1,791 unique accounts.
+          </p>
+          <br />
+          <br />
+          <h3>Graph Construction</h3>
+          <p>
+            We constructed the transaction graph using the igraph library rather
+            than implementing custom breadth-first search traversal. This design
+            choice was driven by computational efficiency: igraph's optimized
+            C-based backend enables direct k-hop neighborhood extraction via
+            .neighborhood(k) calls, avoiding the need to maintain explicit
+            neighbor lists or repeatedly iterate through edge
+            dataframes—operations that scale poorly with graph density, which
+            was key as inital tests revealed the high out-degree characteristic
+            of the L1-small dataset, an inital test with no filtering had 614
+            transactions in a k = 2 neighborhood. Our filtered graph contained
+            1,791 vertices (accounts) connected by thousands of directed edges
+            (transactions), with each edge annotated with transaction metadata
+            (timestamp, amount, currency, payment format) and labels (Is
+            Laundering, Pattern).
+          </p>
+          <h3>Graph Visualizations</h3>
+          <p>
+            Here is a visualization of a 100 node subgraph sampled from the
+            full graph. Nodes are colored based on their involvement in
+            laundering patterns (red for supicious accounts, blue for normal). Edges represent transactions between accounts.
+          </p>
+          <img src="./data_images/graph.png" width="512px" />
+          <p> Here are example patterns extracted from the graph.</p>
+          <img src="./data_images/normal_1.png" width="512px" />
+          <img src="./data_images/fan_in.png" width="512px" />
+          <img src="./data_images/stack_1.png" width="512px" />
+
+          <h3>Dataset Partitioning</h3>
+          <img src="./data_images/sampled_data_table.png" width="512px" />
+          <p></p>
+          <caption style="opacity: 50%">
+            Graph summary: Number of vertices (accounts): 1797 Number of edges
+            (transactions): 15087
+          </caption>
+
+          <p>
+            To prevent information leakage, we ensured strict separation: no
+            transaction or account appearing in teacher training data was
+            included in validation or test sets. Pattern distribution was
+            stratified across splits to maintain balanced representation.
+          </p>
+        </section>
       </div>
+
       <div class="margin-right-block">
         <!-- margin notes for reference block here -->
       </div>
