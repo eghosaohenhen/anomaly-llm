@@ -429,6 +429,15 @@
         </p>
 		<h3>Student Evaluation Results</h3>
 		<h3>Limitations and Challenges</h3>
+		<p>A key limitation of our approach was the restrictive context window and token limits of the LLMs,
+			which constrained input lengths for prompts and subgraph serializations—particularly for larger
+			k-hop neighborhoods. Since even k=1 or k=2 hops could contain many nodes and transactions,
+			this meant that text serializations grew extremely fast. This, in turn, limited the number of few-shot examples we could include and
+			the subgraph radius (k-hops), potentially reducing the quality and comprehensiveness of model judgments
+			on complex laundering patterns. This may just be a limitation on the large language models available
+			for us to use on this project as well as a limitation on the methodology of using text serializations of
+			subgraphs.
+		</p>
 		</section>
 		<section>
 			<h2>Conclusion</h2>
@@ -439,69 +448,6 @@
 
 
       </div>
-    </div>
-
-    <div class="content-margin-container" id="does_x_do_y">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <h1>Does X do Y?</h1>
-        It is well known that Y does Y. And this has raised the question does X
-        do Y? Because if Y does Y then it stands to reason that X does Y. But we
-        cannot answer this until we realize the Z implies Y and X can be linked
-        to Z.<br /><br />
-
-        Now let's write some math!<br />
-        <center>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <mrow>
-              <mrow>
-                <mo>&#x2202;</mo>
-                <mi>y</mi>
-              </mrow>
-              <mo>/</mo>
-              <mrow>
-                <mo>&#x2202;</mo>
-                <mi>x</mi>
-              </mrow>
-            </mrow>
-            <mo>=</mo>
-            <mi>x</mi>
-          </math>
-        </center>
-        <br />
-        It's probably best to ask an LLM to help do the web formatting for math.
-        You can tell it "convert this latex equation into MathML:
-        $$\frac{\partial dy}{\partial dx} = x$$" But it took me a few tries. So,
-        if you get frustrated, you can embed an image of the equation, or use
-        other packages for rendering equations on webpages.
-      </div>
-      <div class="margin-right-block" style="transform: translate(0%, -100%)">
-        <!-- you can move the margin notes up and down with translate -->
-        Interestingly, Plato also asked if X does Y, in
-        <a href="#ref_1">[1]</a>.
-      </div>
-    </div>
-
-    <div class="content-margin-container">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <h1>Another section</h1>
-        In this section we embed a video:
-        <video class="my-video" loop autoplay muted style="width: 725px">
-          <source src="./images/mtsh.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="margin-right-block">
-        A caption for the video could go here.
-      </div>
-    </div>
-
-    <div class="content-margin-container" id="implications_and_limitations">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <h1>Implications and limitations</h1>
-      </div>
-      <div class="margin-right-block"></div>
     </div>
 
     <div class="content-margin-container" id="citations">
