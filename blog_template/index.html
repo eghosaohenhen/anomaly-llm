@@ -183,7 +183,7 @@
 
 </style>
 
-	  <title>The Platonic Representation Hypothesis</title>
+	  <title>LLMs for Transaction Graph Pattern Detection</title>
       <meta property="og:title" content="The Platonic Representation Hypothesis" />
 			<meta charset="UTF-8">
   </head>
@@ -197,15 +197,18 @@
 						<table class="header" align=left>
 								<tr>
 									<td colspan=4>
-										<span style="font-size: 32px; font-family: 'Courier New', Courier, monospace; /* Adds fallbacks */">A Grand Unified Theory of Deep Learning</span>
+										<span style="font-size: 32px; font-family: 'Courier New', Courier, monospace; /* Adds fallbacks */">LLMs for Transaction Graph Pattern Detection</span>
 									</td>
 								</tr>
 								<tr>
 										<td align=left>
-												<span style="font-size:17px"><a href="your_website">Your name</a></span>
+												<span style="font-size:17px"><a href="your_website">Olivia Han</a></span>
 										</td>
 										<td align=left>
-												<span style="font-size:17px"><a href="your_partner's_website">Your partner's name</a></span>
+												<span style="font-size:17px"><a href="your_partner's_website">Eghosa Ohenhen</a></span>
+										</td>
+										<td align=left>
+												<span style="font-size:17px"><a href="your_partner's_website">Jaclyn Thi</a></span>
 										</td>
 								<tr>
 									<td colspan=4 align=left><span style="font-size:18px">Final project for 6.7960, MIT</span></td>
@@ -226,22 +229,37 @@
               <a href="#implications_and_limitations">Implications and limitations</a><br><br>
           </div>
 				</div>
-		    <div class="main-content-block">
-            <!--You can embed an image like this:-->
-            <img src="./images/your_image_here.png" width=512px/>
-		    </div>
-		    <div class="margin-right-block">
+		    <!-- <div class="main-content-block">
+            <img src="./images/your_image_here.png" width=512px/> -->
+		    <!-- </div> -->
+		    <!-- <div class="margin-right-block">
 						Caption for the image.
-		    </div>
+		    </div> -->
 		</div>
 
     <div class="content-margin-container" id="intro">
 				<div class="margin-left-block">
 				</div>
 		    <div class="main-content-block">
-						<h1>Introduction</h1>
-            Motivate your project. What question are you asking. Why is it unanswered so far? What gap in the literature or practice are you filling?
-            Why is it important?
+				<h1>Introduction</h1>
+					<h2>Motivation</h2>
+					<p>Designing systems to detect anomalies in complex relational data while remaining interpretable
+			 is a key challenge in AI. A particularly important domain for this is financial transaction
+			monitoring, where missed anomalies can facilitate fraud and false alarms can disrupt normal
+			   activity. Detecting such behavior is inherently a graph problem, as illicit funds follow structured
+			    patterns across accounts and intermediaries. Graph-based methods like GNNs achieve strong predictive
+				 performance but are typically opaque, offering little human-interpretable insight into why a transaction
+				  was flagged, and require extensive labeled data and infrastructure to train and deploy. As such,
+				   Large Language Models (LLMs) provide a potential alternative way to reason over graph-structured
+				    financial data.</p>
+					<h2>Background and Related Work</h2>
+						<p>Traditional graph-based approaches, including Graph Neural Networks (GNNs), learn latent representations to flag suspicious patterns and have demonstrated strong performance across various fraud detection tasks. Yet, these models are typically opaque, offering limited interpretability and little insight into why a transaction was flagged. This limitation has motivated a shift toward using Large Language Models (LLMs) as reasoning engines over graph-structured financial data. Synthetic AML benchmarks, such as the IBM anti–money laundering dataset, simulate canonical laundering typologies—including fan-in, fan-out, gather-scatter, scatter-gather, simple cycle, random, bipartite, and stack—which provide labeled transaction graphs in a domain where real, sensitive data are scarce (Altman et al., 2023). These typologies also form the pattern vocabulary used in recent LLM-based AML experiments.</p>
+						<p>LLMs offer a promising alternative for reasoning over transaction graphs. Pirmorad (2025) demonstrates that serializing local k-hop neighborhoods around candidate transactions into text allows a general-purpose LLM to emulate an investigator’s reasoning: assessing suspiciousness and producing natural-language justifications. This approach enables LLMs to act as interpretable “reasoning heads,” combining structural graph signals with rich prior knowledge. However, applying LLMs naively to every candidate transaction is computationally expensive, and their tendency to hallucinate—producing plausible but unsupported explanations—poses a major risk in high-stakes domains like AML. Moreover, large graphs often exceed context limits, forcing LLM reasoning to focus on local subgraphs and potentially missing broader, global patterns.</p>
+						<p>To address these challenges, recent work has explored multi-agent LLM reasoning frameworks. Hu et al. (2024) introduce a system in which multiple specialized LLM agents jointly reason over subgraph-centric tasks, aggregating their partial results to produce a final decision. This distributed approach reduces the computational burden on any single model and improves robustness through ensemble-like consensus, though it introduces additional orchestration complexity.</p>
+						<p>Complementary to this, the teacher–student paradigm offers a way to combine the strengths of large, expressive LLMs with the efficiency of smaller models. Knowledge distillation (Hinton et al., 2015) allows a compact student model to learn both the outputs and intermediate reasoning traces of a teacher. Hsieh et al. (2023) demonstrate that chain-of-thought reasoning from very large models can be distilled into smaller LLMs with minimal loss in performance, effectively transferring both answers and explanation styles.<br>
+						<p>Our work sits at the intersection of these trends. We adopt LLM-based graph reasoning for AML (Pirmorad, 2025), specialize multiple teacher agents as pattern experts in a multi-agent framework (Hu et al., 2024), and distill their judgments into a single, compact student model using supervised distillation techniques inspired by Hinton et al. (2015) and Hsieh et al. (2023). This design aims to balance interpretability, accuracy, and computational efficiency in high-stakes AML reasoning.</p>
+					<h2>Goals</h2>
+						<p>In this project, we investigate whether a smaller student LLM can learn pattern-aware AML reasoning by distilling knowledge from larger, pattern-specialized teacher LLMs. We focus on two accepted laundering typologies—fan-in and fan-out—using a transactional graph derived from a realistic AML benchmark, aiming to show that this approach can extend to other patterns. For each typology, a teacher LLM acts as a specialist, producing structured judgments (suspicious/not suspicious, pattern label, and explanation) for k-hop subgraphs around candidate transactions. We then fine-tune a compact student model to imitate these teachers via supervised distillation. Our key questions are: (1) Can a small student approximate the pattern-level judgments of larger teachers? and (2) How do factors like teacher data volume, neighborhood radius k, number of teachers, and inclusion of teacher rationales affect student performance and interpretability? This study explores the feasibility of scalable, explainable AML detectors distilled from expert LLMs.</p>
 		    </div>
 		    <div class="margin-right-block">
 						Margin note that clarifies some detail #main-content-block for intro section.
