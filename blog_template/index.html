@@ -219,23 +219,23 @@
 					</div>
 		</div>
 
-		<div class="content-margin-container" id="intro">
-				<div class="margin-left-block">
+		<!-- <div class="content-margin-container" id="intro"> -->
+				<!-- <div class="margin-left-block"> -->
           <!-- table of contents here -->
-          <div style="position:fixed; max-width:inherit; top:max(20%,120px)">
-              <b style="font-size:16px">Outline</b><br><br>
-              <a href="#intro">Introduction</a><br><br>
-              <a href="#does_x_do_y">Does X do Y?</a><br><br>
-              <a href="#implications_and_limitations">Implications and limitations</a><br><br>
-          </div>
-				</div>
+          <!-- <div style="position:fixed; max-width:inherit; top:max(20%,120px)"> -->
+              <!-- <b style="font-size:16px">Outline</b><br><br> -->
+              <!-- <a href="#intro">Introduction</a><br><br> -->
+              <!-- <a href="#does_x_do_y">Does X do Y?</a><br><br> -->
+              <!-- <a href="#implications_and_limitations">Implications and limitations</a><br><br> -->
+          <!-- </div> -->
+				<!-- </div> -->
 		    <!-- <div class="main-content-block">
             <img src="./images/your_image_here.png" width=512px/> -->
 		    <!-- </div> -->
 		    <!-- <div class="margin-right-block">
 						Caption for the image.
 		    </div> -->
-		</div>
+		<!-- </div> -->
 
     <div class="content-margin-container" id="intro">
 				<div class="margin-left-block">
@@ -260,10 +260,68 @@
 						<p>Our work sits at the intersection of these trends. We adopt LLM-based graph reasoning for AML (Pirmorad, 2025), specialize multiple teacher agents as pattern experts in a multi-agent framework (Hu et al., 2024), and distill their judgments into a single, compact student model using supervised distillation techniques inspired by Hinton et al. (2015) and Hsieh et al. (2023). This design aims to balance interpretability, accuracy, and computational efficiency in high-stakes AML reasoning.</p>
 					<h2>Goals</h2>
 						<p>In this project, we investigate whether a smaller student LLM can learn pattern-aware AML reasoning by distilling knowledge from larger, pattern-specialized teacher LLMs. We focus on two accepted laundering typologies—fan-in and fan-out—using a transactional graph derived from a realistic AML benchmark, aiming to show that this approach can extend to other patterns. For each typology, a teacher LLM acts as a specialist, producing structured judgments (suspicious/not suspicious, pattern label, and explanation) for k-hop subgraphs around candidate transactions. We then fine-tune a compact student model to imitate these teachers via supervised distillation. Our key questions are: (1) Can a small student approximate the pattern-level judgments of larger teachers? and (2) How do factors like teacher data volume, neighborhood radius k, number of teachers, and inclusion of teacher rationales affect student performance and interpretability? This study explores the feasibility of scalable, explainable AML detectors distilled from expert LLMs.</p>
+			<section>
+			<h2>Teacher Model Construction</h2>
+
+			<p>
+				To generate high-quality supervisory signals for student fine-tuning, we instantiated
+				pattern-specialized teacher LLMs using <strong>gpt-4o</strong>, following the same base model
+				choice as Pirmorad et al. We initially envisioned constructing eight teacher models, each
+				dedicated to identifying one of the eight common money-laundering typologies. Due to time
+				constraints, we focused on two representative patterns—<strong>fan-in</strong> and
+				<strong>stack</strong>—and trained a separate teacher for each. Each teacher’s objective was to
+				reliably distinguish serialized subgraphs corresponding to its specialized pattern from benign
+				(non-laundering) subgraphs.
+			</p>
+
+			<p>
+				Each teacher model operated within a <strong>few-shot prompting framework</strong>. Prompts began
+				with a definition of the task, a description of possible node and edge types, and a curated block
+				of serialized subgraphs. For the few-shot examples, we constructed balanced sets of positive
+				(pattern-specific) and negative (non-laundering) subgraphs using the pattern annotations
+				provided in the dataset by Altman et al. These exemplars were paired with concise explanations of
+				the relevant typology to help the teacher specialize.
+			</p>
+
+			<p>
+				After the few-shot block, each prompt concluded with a <strong>test subgraph serialization</strong>
+				and instructions directing the model to (i) classify the subgraph as <em>Suspicious</em> or
+				<em>Not Suspicious</em>, (ii) provide a brief rationale, and (iii) state explicitly whether the
+				teacher’s specialized pattern was present. Teacher outputs were constrained to a structured JSON
+				format:
+			</p>
+
+			<pre>
+			<code>{
+			"conclusion": "Suspicious" | "Not Suspicious",
+			"observed_pattern": "&lt;pattern-name or none&gt;",
+			"rationale": "&lt;2–3 sentence explanation&gt;"
+			}
+			</code>
+			</pre>
+
+			<p>
+				To evaluate the teachers, we curated a separate test set consisting of fan-in, stack, and normal
+				subgraphs that were <em>not</em> used in the few-shot block. Each teacher was evaluated only on
+				subgraphs containing its own pattern or normal subgraphs, intentionally avoiding cross-typology
+				classification. This design choice ensured that teachers produced highly precise positive
+				examples for downstream student training, rather than being weakened by harder negative cases
+				unrelated to their specialization.
+			</p>
+			</section>
+
+			<img src="./images/teacher-eval-95.png" width=512px/>
+
+			<img src="./images/teacher-eval-table.png" width=512px/>
+			<p>
+				The fan-in teacher achieves moderate precision (0.50) but high recall (0.83),
+				indicating it correctly flags most true fan-in cases at the cost of a fair number
+				of false positives (CI ±0.2634). In contrast, the stack teacher has somewhat higher precision
+				(0.625) but substantially lower recall (0.31), suggesting it is more conservative and misses many
+				true stack patterns despite a similar level of statistical uncertainty (CI ±0.2787).
+			</p>
 		    </div>
-		    <div class="margin-right-block">
-						Margin note that clarifies some detail #main-content-block for intro section.
-		    </div>
+
 		</div>
 
 		<div class="content-margin-container" id="does_x_do_y">
@@ -323,7 +381,6 @@
 				</div>
 		    <div class="main-content-block">
 						<h1>Implications and limitations</h1>
-						Let's end with some discussion of the implications and limitations.
 		    </div>
 		    <div class="margin-right-block">
 		    </div>
