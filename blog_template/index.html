@@ -408,7 +408,9 @@
             avoiding cross-typology classification. This design choice ensured
             that teachers produced highly precise positive examples for
             downstream student training, rather than being weakened by harder
-            negative cases unrelated to their specialization.
+            negative cases unrelated to their specialization. The test serializations
+			used to evaluate the teachers and the teacher judgments were then used
+			as examples to fine-tune the student model.
           </p>
 
 		  <h3>Student Model Distillation</h3>
