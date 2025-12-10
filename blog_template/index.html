@@ -283,16 +283,16 @@
           laundering dataset, simulate canonical laundering typologies—including
           fan-in, fan-out, gather-scatter, scatter-gather, simple cycle, random,
           bipartite, and stack—which provide labeled transaction graphs in a
-          domain where real, sensitive data are scarce (Altman et al., 2023).
+          domain where real, sensitive data are scarce [1].
           These typologies also form the pattern vocabulary used in recent
           LLM-based AML experiments.
         </p>
         <p>
           LLMs offer a promising alternative for reasoning over transaction
-          graphs. Pirmorad (2025) demonstrates that serializing local k-hop
+          graphs. Pirmorad demonstrates that serializing local k-hop
           neighborhoods around candidate transactions into text allows a
           general-purpose LLM to emulate an investigator’s reasoning: assessing
-          suspiciousness and producing natural-language justifications. This
+          suspiciousness and producing natural-language justifications [2]. This
           approach enables LLMs to act as interpretable “reasoning heads,”
           combining structural graph signals with rich prior knowledge. However,
           applying LLMs naively to every candidate transaction is
@@ -314,20 +314,20 @@
         <p>
           Complementary to this, the teacher–student paradigm offers a way to
           combine the strengths of large, expressive LLMs with the efficiency of
-          smaller models. Knowledge distillation (Hinton et al., 2015) allows a
+          smaller models. Knowledge distillation allows a
           compact student model to learn both the outputs and intermediate
-          reasoning traces of a teacher. Hsieh et al. (2023) demonstrate that
+          reasoning traces of a teacher [3]. Hsieh et al. demonstrate that
           chain-of-thought reasoning from very large models can be distilled
           into smaller LLMs with minimal loss in performance, effectively
-          transferring both answers and explanation styles.<br />
+          transferring both answers and explanation styles [4].<br />
         </p>
         <p>
           Our work sits at the intersection of these trends. We adopt LLM-based
-          graph reasoning for AML (Pirmorad, 2025), specialize multiple teacher
+          graph reasoning for AML, specialize multiple teacher
           agents as pattern experts in a multi-agent framework (Hu et al.,
           2024), and distill their judgments into a single, compact student
           model using supervised distillation techniques inspired by Hinton et
-          al. (2015) and Hsieh et al. (2023). This design aims to balance
+          al. and Hsieh et al.. This design aims to balance
           interpretability, accuracy, and computational efficiency in
           high-stakes AML reasoning.
         </p>
@@ -376,7 +376,7 @@
             types, and a curated block of serialized subgraphs. For the few-shot
             examples, we constructed balanced sets of positive
             (pattern-specific) and negative (non-laundering) subgraphs using the
-            pattern annotations provided in the dataset by Altman et al. These
+            pattern annotations provided in the dataset by Altman et al [1]. These
             exemplars were paired with concise explanations of the relevant
             typology to help the teacher specialize.
           </p>
