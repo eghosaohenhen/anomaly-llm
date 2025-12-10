@@ -480,7 +480,22 @@
 		</section>
 		<section>
 			<h2>Conclusion</h2>
-			<h2>Future Work</h2>
+			<p>Overall, we found that while teacher–student LLM paradigms hold promise
+				for improving interpretability and explainability in financial crime analysis,
+				significant challenges remain in scaling these methods. By serializing local
+				transaction neighborhoods and distilling pattern-aware judgments from specialized
+				teachers into a smaller student model, we demonstrated that a portion of the teachers’
+				structured decision behavior can be retained in a lighter-weight system. More broadly,
+				our results reinforce the view that graph-structured financial reasoning is a promising
+				yet difficult domain for LLMs. Future extensions could include training additional teachers,
+				experimenting with larger or more complex subgraphs, and expanding coverage to all eight
+				canonical AML typologies so that the student must navigate multi-pattern and ambiguous cases.
+				Methodologically, richer forms of reasoning supervision—such as counterfactual rationales or
+				contrastive examples where only small components of the subgraph differ—may help the student
+				learn more faithful decision rules rather than imitating surface-level explanations. A more
+				ambitious direction would be to explore mixtures of teachers operating at different granularities,
+				such as combining local typology experts with a global teacher, to evaluate whether hierarchical
+				or ensemble distillation can further improve robustness.</p>
 
 		</section>
 
